@@ -349,6 +349,11 @@ class HypixelPHP
             $keyPair
         );
 
+        if (isset($pairs['byPlayer']) && !isset($pairs['byUuid'])) {
+          $pairs['byUuid'] = $this->getUUID($pairs['byPlayer']);
+          $pairs['byPlayer'] = null;
+        }
+
         foreach ($pairs as $key => $val) {
             if ($val != null && $val != '') {
                 if ($key == 'player' && $val instanceof Player) {
